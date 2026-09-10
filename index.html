@@ -144,9 +144,6 @@
       justify-content: center;
     }
     .hero__photo-placeholder svg { opacity: 0.08; }
-    /* swap placeholder for real photo:
-       <img src="photo.jpg" alt="Dmitrii Penzin"
-            style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"> */
 
     /* ── Works ──────────────────────────────────── */
     .works {
@@ -208,7 +205,6 @@
     }
     .work-item:hover { background: var(--bg-raised); }
 
-    /* Video embed — paste YouTube iframe here */
     .work-item__video-wrap {
       width: 100%;
       aspect-ratio: 16/9;
@@ -222,7 +218,6 @@
       height: 100%;
       border: none;
     }
-    /* Placeholder shown when no iframe is present */
     .work-item__thumb {
       width: 100%;
       aspect-ratio: 16/9;
@@ -380,11 +375,6 @@
           </div>
 
           <div class="hero__right" aria-hidden="true">
-            <!--
-              Replace this div with your photo:
-              <img src="photo.jpg" alt="Dmitrii Penzin"
-                   style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);display:block;">
-            -->
             <div class="hero__photo-placeholder">
               <svg width="160" height="160" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="8" r="4" stroke="white" stroke-width="0.8"/>
@@ -421,64 +411,54 @@
           <div class="works__grid">
 
             <article class="work-item">
-              <!--
-                TO ADD A VIDEO replace .work-item__thumb with:
-                <div class="work-item__video-wrap">
-                  <iframe
-                    src="https://www.youtube.com/embed/YOUR_ID?rel=0&modestbranding=1"
-                    allow="autoplay; fullscreen"
-                    allowfullscreen
-                    loading="lazy"
-                    title="Project title">
-                  </iframe>
-                </div>
-              -->
-              <div class="work-item__thumb" aria-label="Project preview">
-                <svg width="72" height="72" viewBox="0 0 24 24" fill="none">
-                  <rect x="2" y="5" width="20" height="14" rx="1"
-                        stroke="white" stroke-width="1"/>
-                  <circle cx="12" cy="12" r="3" stroke="white" stroke-width="1"/>
-                </svg>
-                <span class="work-item__thumb-label">2024</span>
+              <div class="work-item__video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/ZGafGarvkQU?rel=0&modestbranding=1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                  title="Точка Банк">
+                </iframe>
               </div>
               <div class="work-item__body">
-                <h3 class="work-item__title">Project title</h3>
-                <p class="work-item__meta">60 sec · AI + Live shoot</p>
+                <h3 class="work-item__title">Точка Банк</h3>
+                <p class="work-item__meta">2024</p>
               </div>
             </article>
 
             <article class="work-item">
-              <div class="work-item__thumb" aria-label="Project preview">
-                <svg width="72" height="72" viewBox="0 0 24 24" fill="none">
-                  <rect x="2" y="5" width="20" height="14" rx="1"
-                        stroke="white" stroke-width="1"/>
-                  <circle cx="12" cy="12" r="3" stroke="white" stroke-width="1"/>
-                </svg>
-                <span class="work-item__thumb-label">2024</span>
+              <div class="work-item__video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/QcLXZ9uD2Ds?rel=0&modestbranding=1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                  title="Ретрит 3 — тизер ситкома">
+                </iframe>
               </div>
               <div class="work-item__body">
-                <h3 class="work-item__title">Project title</h3>
-                <p class="work-item__meta">30 sec · Runway Gen-3</p>
+                <h3 class="work-item__title">Ретрит 3 — тизер ситкома</h3>
+                <p class="work-item__meta">2024</p>
               </div>
             </article>
 
             <article class="work-item">
-              <div class="work-item__thumb" aria-label="Project preview">
-                <svg width="72" height="72" viewBox="0 0 24 24" fill="none">
-                  <rect x="2" y="5" width="20" height="14" rx="1"
-                        stroke="white" stroke-width="1"/>
-                  <circle cx="12" cy="12" r="3" stroke="white" stroke-width="1"/>
-                </svg>
-                <span class="work-item__thumb-label">2023</span>
+              <div class="work-item__video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/DLt5H9R1jOg?rel=0&modestbranding=1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                  title="Тизер Seedance 2.5">
+                </iframe>
               </div>
               <div class="work-item__body">
-                <h3 class="work-item__title">Project title</h3>
-                <p class="work-item__meta">45 sec · Sora + RED</p>
+                <h3 class="work-item__title">Тизер Seedance 2.5</h3>
+                <p class="work-item__meta">2024</p>
               </div>
             </article>
 
           </div>
-          <p class="works__note">Replace placeholders — paste a YouTube iframe into each .work-item__video-wrap</p>
         </div>
 
         <!-- Film -->
