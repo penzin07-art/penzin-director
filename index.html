@@ -18,7 +18,6 @@
       --heading:   #f5f0eb;
       --accent:    #e8401a;
       --accent-dk: #b83010;
-
       --font-display: "Bebas Neue", "Arial Narrow", Arial, sans-serif;
       --font-body:    "Inter", system-ui, sans-serif;
     }
@@ -93,9 +92,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 4rem 0;
+      padding: 4rem 2rem;
       gap: 1.5rem;
-      position: relative;
     }
     .hero__role {
       font-size: 0.8rem;
@@ -112,20 +110,23 @@
       letter-spacing: 0.01em;
     }
     .hero__title .accent { color: var(--accent); }
-    .hero__dot {
-      width: 8px; height: 8px;
-      background: var(--accent);
-      position: absolute;
-      bottom: 4rem;
-      right: 2rem;
+
+    .hero__right {
+      position: relative;
+      border-left: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--bg-raised);
     }
-    .hero__right { position: relative; border-left: 1px solid var(--border); overflow: hidden; }
-    .hero__photo {
+    .hero__video {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(100%);
       display: block;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero__video { display: none; }
     }
 
     /* ── Works ── */
@@ -170,61 +171,19 @@
     }
     .work-item { background: var(--bg); overflow: hidden; }
 
-    /* Превью с кнопкой play — lazy load iframe */
-    .work-item__media { position: relative; }
-    .work-item__poster {
-      position: relative;
-      display: block;
-      width: 100%;
-      aspect-ratio: 16/9;
-      padding: 0;
-      overflow: hidden;
-      background: #000;
-    }
-    .work-item__poster img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease, opacity 0.3s;
-    }
-    .work-item__poster:hover img { transform: scale(1.04); opacity: 0.85; }
-    .work-item__poster::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(14,6,2,0.85), rgba(14,6,2,0.15) 60%, transparent);
-      pointer-events: none;
-    }
-    .work-item__play {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      width: 68px; height: 68px;
-      background: var(--accent);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .work-item__poster:hover .work-item__play {
-      transform: translate(-50%, -50%) scale(1.1);
-      background: var(--accent-dk);
-    }
-    .work-item__poster:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
     .work-item__video-wrap {
+      position: relative;
       width: 100%;
       aspect-ratio: 16/9;
-      position: relative;
       background: #000;
+      overflow: hidden;
     }
+    .work-item__video-wrap video,
     .work-item__video-wrap iframe {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      display: block;
       border: none;
     }
 
@@ -245,9 +204,8 @@
       color: var(--heading);
       line-height: 1;
       letter-spacing: 0.02em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 2.5rem;
     }
-    .contact__dot { width: 8px; height: 8px; background: var(--accent); margin: 0 auto 2.5rem; }
     .contact__links { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
     .contact-btn {
       display: inline-flex;
@@ -279,7 +237,6 @@
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero__right { display: none; }
       .hero__left { padding-block: 4rem 3rem; }
-      .hero__dot { display: none; }
     }
     @media (max-width: 560px) {
       .container { padding-inline: 1.25rem; }
@@ -287,7 +244,6 @@
       .contact__links { flex-direction: column; align-items: center; }
       .contact-btn { width: 100%; max-width: 260px; }
       .footer__inner { flex-direction: column; gap: 0.75rem; text-align: center; }
-      .work-item__play { width: 54px; height: 54px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { transition-duration: 0.01ms !important; }
@@ -319,17 +275,31 @@
     <section id="hero">
       <div class="hero">
         <div class="container" style="display:contents;">
-          <div class="hero__left" style="padding-inline: 2rem;">
+
+          <div class="hero__left">
             <p class="hero__role">AI Creative Producer / Director</p>
             <h1 class="hero__title">
               DMITRII<br>
               <span class="accent">PENZIN</span>
             </h1>
-            <div class="hero__dot" aria-hidden="true"></div>
           </div>
+
           <div class="hero__right" aria-hidden="true">
-            <img src="photo.jpg" alt="Dmitrii Penzin" class="hero__photo" />
+            <video
+              class="hero__video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            >
+              <source
+                src="https://9dd94e00-4079-435c-922e-0b0a3e3ed4b9.srvstatic.kz/d2439294380d2f37a25c6c8326f52496_5d9efa21-d446-44ef-bcd2-a199c6ca7ec6.mp4"
+                type="video/mp4"
+              />
+            </video>
           </div>
+
         </div>
       </div>
     </section>
@@ -353,56 +323,53 @@
           <div class="works__grid">
 
             <article class="work-item">
-              <div class="work-item__media">
-                <button class="work-item__poster" data-video="vNuisd7W9-4"
-                        aria-label="Play Суточно.Ру">
-                  <img src="https://img.youtube.com/vi/vNuisd7W9-4/maxresdefault.jpg" alt="" loading="lazy">
-                  <span class="work-item__play" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </span>
-                </button>
+              <div class="work-item__video-wrap">
+                <video controls preload="metadata">
+                  <source src="https://9dd94e00-4079-435c-922e-0b0a3e3ed4b9.srvstatic.kz/%D0%A1%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%BE.%D0%A0%D1%83.mp4" type="video/mp4">
+                </video>
               </div>
               <div class="work-item__body">
                 <h3 class="work-item__title">Суточно.Ру</h3>
-                <p class="work-item__meta">2024</p>
+                <p class="work-item__meta">2026</p>
               </div>
             </article>
 
             <article class="work-item">
-              <div class="work-item__media">
-                <button class="work-item__poster" data-video="bk-Znfwvmj0"
-                        aria-label="Play One Two Trip">
-                  <img src="https://img.youtube.com/vi/bk-Znfwvmj0/maxresdefault.jpg" alt="" loading="lazy">
-                  <span class="work-item__play" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </span>
-                </button>
+              <div class="work-item__video-wrap">
+                <video controls preload="metadata">
+                  <source src="https://9dd94e00-4079-435c-922e-0b0a3e3ed4b9.srvstatic.kz/One%20Two%20Trip.mp4" type="video/mp4">
+                </video>
               </div>
               <div class="work-item__body">
                 <h3 class="work-item__title">One Two Trip</h3>
-                <p class="work-item__meta">2024</p>
+                <p class="work-item__meta">2026</p>
               </div>
             </article>
 
             <article class="work-item">
-              <div class="work-item__media">
-                <button class="work-item__poster" data-video="ZGafGarvkQU"
-                        aria-label="Play Точка Банк">
-                  <img src="https://img.youtube.com/vi/ZGafGarvkQU/maxresdefault.jpg" alt="" loading="lazy">
-                  <span class="work-item__play" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </span>
-                </button>
+              <div class="work-item__video-wrap">
+                <video controls preload="metadata">
+                  <source src="https://9dd94e00-4079-435c-922e-0b0a3e3ed4b9.srvstatic.kz/%D0%A2%D0%BE%D1%87%D0%BA%D0%B0%20%D0%B1%D0%B0%D0%BD%D0%BA.mp4" type="video/mp4">
+                </video>
               </div>
               <div class="work-item__body">
                 <h3 class="work-item__title">Точка Банк</h3>
-                <p class="work-item__meta">2024</p>
+                <p class="work-item__meta">2026</p>
+              </div>
+            </article>
+
+            <article class="work-item">
+              <div class="work-item__video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/WI6qaqCg6mI"
+                  title="Tutu — 2026"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="work-item__body">
+                <h3 class="work-item__title">Tutu</h3>
+                <p class="work-item__meta">2026</p>
               </div>
             </article>
 
@@ -414,38 +381,26 @@
           <div class="works__grid">
 
             <article class="work-item">
-              <div class="work-item__media">
-                <button class="work-item__poster" data-video="QcLXZ9uD2Ds"
-                        aria-label="Play Ретрит 3">
-                  <img src="https://img.youtube.com/vi/QcLXZ9uD2Ds/maxresdefault.jpg" alt="" loading="lazy">
-                  <span class="work-item__play" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </span>
-                </button>
+              <div class="work-item__video-wrap">
+                <video controls preload="metadata">
+                  <source src="https://9dd94e00-4079-435c-922e-0b0a3e3ed4b9.srvstatic.kz/%D0%A2%D0%B8%D0%B7%D0%B5%D1%80%20%D0%A0%D0%B5%D1%82%D1%80%D0%B8%D1%82%203.mp4" type="video/mp4">
+                </video>
               </div>
               <div class="work-item__body">
                 <h3 class="work-item__title">Ретрит 3 — тизер ситкома</h3>
-                <p class="work-item__meta">2024</p>
+                <p class="work-item__meta">2026</p>
               </div>
             </article>
 
             <article class="work-item">
-              <div class="work-item__media">
-                <button class="work-item__poster" data-video="DLt5H9R1jOg"
-                        aria-label="Play Seedance 2.5">
-                  <img src="https://img.youtube.com/vi/DLt5H9R1jOg/maxresdefault.jpg" alt="" loading="lazy">
-                  <span class="work-item__play" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </span>
-                </button>
+              <div class="work-item__video-wrap">
+                <video controls preload="metadata">
+                  <source src="https://9dd94e00-4079-435c-922e-0b0a3e3ed4b9.srvstatic.kz/%D0%A2%D0%B8%D0%B7%D0%B5%D1%80%20Seedance%202.5.mp4" type="video/mp4">
+                </video>
               </div>
               <div class="work-item__body">
                 <h3 class="work-item__title">Тизер Seedance 2.5</h3>
-                <p class="work-item__meta">2024</p>
+                <p class="work-item__meta">2026</p>
               </div>
             </article>
 
@@ -458,7 +413,6 @@
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="container">
         <h2 class="contact__title" id="contact-title">GET IN TOUCH</h2>
-        <div class="contact__dot" aria-hidden="true"></div>
         <div class="contact__links">
           <a href="https://t.me/Penzin07"
              class="contact-btn"
@@ -479,36 +433,13 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__inner">
-        <p class="footer__copy">© 2025 Dmitrii Penzin</p>
+        <p class="footer__copy">© 2026 Dmitrii Penzin</p>
         <p class="footer__copy">AI Creative Producer / Director</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Lazy load YouTube iframe при клике на превью
-    document.querySelectorAll('.work-item__poster[data-video]').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const videoId = this.dataset.video;
-        const media = this.closest('.work-item__media');
-        
-        const iframe = document.createElement('div');
-        iframe.className = 'work-item__video-wrap';
-        iframe.innerHTML = `
-          <iframe
-            src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            title="Video player">
-          </iframe>
-        `;
-        
-        media.innerHTML = '';
-        media.appendChild(iframe);
-      });
-    });
-
-    // Tabs
     const btns = document.querySelectorAll('.tab-btn');
     const panels = document.querySelectorAll('.tab-panel');
 
